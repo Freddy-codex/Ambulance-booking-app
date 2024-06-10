@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "998692777530",
+    "project_id": "medex-ambulance",
+    "storage_bucket": "medex-ambulance.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:998692777530:android:e7c6bcad17c26e708ccf03",
+        "android_client_info": {
+          "package_name": "com.example.ambulance"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCF3J7bmof8EBGazGI-_52i5dRsuRDKVy8"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
