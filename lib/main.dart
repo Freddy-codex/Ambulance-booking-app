@@ -1,15 +1,11 @@
 import 'package:ambulance/auth/auth.dart';
-import 'package:ambulance/auth/number_auth.dart';
-import 'package:ambulance/firebase_options.dart';
-import 'package:ambulance/pages/delivery_state.dart';
-import 'package:ambulance/pages/driver_page.dart';
-import 'package:ambulance/pages/forgot_password.dart';
-import 'package:ambulance/pages/home_page.dart';
-import 'package:ambulance/pages/phone_number.dart';
+import 'package:ambulance/services/firebase_options.dart';
+import 'package:ambulance/services/delivery_state.dart';
+import 'package:ambulance/pages/driver_home.dart';
+import 'package:ambulance/pages/user_home.dart';
 import 'package:ambulance/pages/profile_page.dart';
-import 'package:ambulance/pages/tracking.dart';
-import 'package:ambulance/pages/users_page.dart';
-import 'package:ambulance/pages/notifications.dart';
+import 'package:flutter/services.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
@@ -40,20 +36,21 @@ class MyApp extends StatelessWidget {
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
+    SystemChrome.setSystemUIOverlayStyle(const SystemUiOverlayStyle(
+        systemNavigationBarColor: Color(0xff1d1d1d)));
     return GetMaterialApp(
       debugShowCheckedModeBanner: false,
       theme: ThemeData(
-        fontFamily: ('inter'),
+        textTheme: GoogleFonts.poppinsTextTheme(),
+        // fontFamily: ('inter'),
         useMaterial3: true,
       ),
       home: const AuthPage(),
       routes: {
-        'homepage': (context) => const HomePage(),
-        'driverspage': (context) => const DriverPage(),
         'authpage': (context) => const AuthPage(),
         'profilepage': (context) => ProfilePage(),
-        'userspage': (context) => const UsersPage(),
-        'trackingpage': (context) => const TrackingPage(),
+        'userhome': (context) => UserHome(),
+        'driverhome': (context) => const DriverHome(),
       },
     );
   }

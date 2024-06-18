@@ -1,7 +1,5 @@
 import 'package:ambulance/pages/loginScreen.dart';
 import 'package:flutter/material.dart';
-// import 'WelcomeScreen.dart';
-// import 'WelcomeScreen2.dart';
 
 class user extends StatelessWidget {
   const user({super.key});
@@ -10,8 +8,9 @@ class user extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
+        centerTitle: true,
         title: const Text('MedEx', style: TextStyle(color: Colors.white)),
-        backgroundColor: const Color.fromARGB(218, 0, 0, 0),
+        backgroundColor: Colors.black,
       ),
       body: SafeArea(
         child: Container(
@@ -31,7 +30,7 @@ class user extends StatelessWidget {
                   width: 100.0, // Specify the desired width
                   height: 100.0, // Specify the desired height
                   child: Image(
-                    image: AssetImage('assets/logo.png'),
+                    image: AssetImage('assets/icons/icon.jpeg'),
                   ),
                 ),
               ),
@@ -41,7 +40,7 @@ class user extends StatelessWidget {
             ),
             const Text(
               'Welcome to MedEx',
-              style: TextStyle(fontSize: 30, color: Colors.white),
+              style: TextStyle(fontSize: 28, color: Colors.white),
             ),
             const SizedBox(
               height: 30,
@@ -59,7 +58,8 @@ class user extends StatelessWidget {
                 decoration: BoxDecoration(
                   // boxShadow: [BoxShadow(color: Colors.black)],
                   borderRadius: BorderRadius.circular(30),
-                  border: Border.all(color: Color(0xfff24407)),
+                  border:
+                      Border.all(color: const Color.fromARGB(255, 221, 6, 6)),
                 ),
                 child: const Center(
                   child: Text(
@@ -85,7 +85,7 @@ class user extends StatelessWidget {
               },
               child: Container(
                 height: 48,
-                width: 250,
+                width: 200,
                 decoration: BoxDecoration(
                   boxShadow: const [
                     BoxShadow(
@@ -95,9 +95,10 @@ class user extends StatelessWidget {
                       // offset: Offset(0.0, 3.0)
                     )
                   ],
-                  color: Color.fromARGB(255, 221, 63, 6),
+                  color: const Color.fromARGB(255, 221, 6, 6),
                   borderRadius: BorderRadius.circular(30),
-                  border: Border.all(color: Color.fromARGB(255, 221, 63, 6)),
+                  border:
+                      Border.all(color: const Color.fromARGB(255, 221, 6, 6)),
                 ),
                 child: const Center(
                   child: Text(
@@ -118,10 +119,6 @@ class user extends StatelessWidget {
             const SizedBox(
               height: 12,
             ),
-            // const SizedBox(
-            //     height: 30,
-            //     width: 100,
-            //     child: Image(image: AssetImage('assets/social.png')))
           ]),
         ),
       ),

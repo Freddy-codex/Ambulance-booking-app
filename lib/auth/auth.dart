@@ -1,6 +1,6 @@
-import 'package:ambulance/pages/driver_page.dart';
-import 'package:ambulance/pages/home_page.dart';
+import 'package:ambulance/pages/driver_home.dart';
 import 'package:ambulance/pages/user.dart';
+import 'package:ambulance/pages/user_home.dart';
 import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
@@ -44,9 +44,9 @@ class AuthPage extends StatelessWidget {
                   // Extract data
                   Map<String, dynamic>? user = snapshot.data!.data();
                   if (user?['type'] == 'user') {
-                    return HomePage();
+                    return UserHome();
                   } else {
-                    return const DriverPage();
+                    return const DriverHome();
                   }
                 } else {
                   return const Text("No data");

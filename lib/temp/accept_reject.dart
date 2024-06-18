@@ -4,8 +4,9 @@ import 'dart:convert';
 // import 'dart:math';
 
 import 'package:ambulance/components/drawer.dart';
-import 'package:ambulance/pages/delivery_state.dart';
-import 'package:ambulance/pages/notification_services.dart';
+import 'package:ambulance/services/constants.dart';
+import 'package:ambulance/services/delivery_state.dart';
+import 'package:ambulance/services/notification_services.dart';
 // import 'package:animated_toggle_switch/animated_toggle_switch.dart';
 // import 'package:firebase_messaging/firebase_messaging.dart';
 // import 'package:flutter/cupertino.dart';
@@ -49,6 +50,7 @@ class _AcceptRejectState extends State<AcceptReject> {
   void initState() {
     trackingCollection = firestore.collection('Tracking');
     // driverCollection = firestore.collection('DriverLocation');
+    setUserDetails(widget.userId);
     super.initState();
   }
 
@@ -271,8 +273,7 @@ class _AcceptRejectState extends State<AcceptReject> {
                           body: jsonEncode(data),
                           headers: {
                             'Content-Type': 'application/json; charset=UTF-8',
-                            'Authorization':
-                                'key=AAAA6Ia6bjo:APA91bEf5tIHVpYuGMSV2GSIFNBWQTBjfdIC4XAa8GETVu9t8gUzhuP2YyXycZEMt4zBsLxft9GrloEZXWhFQTUcUQwBIGFiC1Ku9q5YzqLXwZPZxvpYZN-6m1QMb9cyY9B4pvrCeWYa'
+                            'Authorization': 'key=$messagingAPIKey'
                           });
                     });
                   },
@@ -312,8 +313,7 @@ class _AcceptRejectState extends State<AcceptReject> {
                           body: jsonEncode(data),
                           headers: {
                             'Content-Type': 'application/json; charset=UTF-8',
-                            'Authorization':
-                                'key=AAAA6Ia6bjo:APA91bEf5tIHVpYuGMSV2GSIFNBWQTBjfdIC4XAa8GETVu9t8gUzhuP2YyXycZEMt4zBsLxft9GrloEZXWhFQTUcUQwBIGFiC1Ku9q5YzqLXwZPZxvpYZN-6m1QMb9cyY9B4pvrCeWYa'
+                            'Authorization': 'key=$messagingAPIKey'
                           });
                     });
                   },

@@ -34,6 +34,8 @@ dependencies:
   delightful_toast: ^1.1.0
   quickalert: ^1.1.0
   pinput: ^4.0.0
+  google_fonts: ^6.2.1
+  avatar_glow: ^3.0.1
 
   cloud_firestore: ^4.17.2
   firebase_auth: ^4.19.4

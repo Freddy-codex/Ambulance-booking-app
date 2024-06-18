@@ -104,12 +104,7 @@ class LocationPickerAlertState extends State<LocationPickerAlert> {
                     createUserDocument(currentUser);
                     Navigator.pop(context);
                     widget.onLocationSelected?.call(_selectedLocation!);
-                    // ScaffoldMessenger.of(context).showSnackBar(
-                    //   const SnackBar(
-                    //     content: Text("Ambulance Selected"),
-                    //     duration: Duration(seconds: 2),
-                    //   ),
-                    // );
+
                     DelightToastBar(
                       builder: (context) {
                         return const ToastCard(

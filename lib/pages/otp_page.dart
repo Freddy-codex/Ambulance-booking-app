@@ -1,6 +1,4 @@
-// import 'package:ambulance/auth/number_auth.dart';
 import 'package:ambulance/pages/loginScreen.dart';
-// import 'package:ambulance/pages/phone_number.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
@@ -16,6 +14,7 @@ class OtpPage extends StatefulWidget {
     required this.email,
     required this.number,
     required this.password,
+    this.vehicle,
   });
   final String vid;
   final String type;
@@ -23,6 +22,7 @@ class OtpPage extends StatefulWidget {
   final String email;
   final String number;
   final String password;
+  final String? vehicle;
 
   @override
   State<OtpPage> createState() => _OtpPageState();
@@ -91,22 +91,33 @@ class _OtpPageState extends State<OtpPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: const Color(0xff1d1d1d),
       resizeToAvoidBottomInset: true,
       body: SingleChildScrollView(
         child: ListView(
           shrinkWrap: true,
           children: [
-            Image.asset('assets/logo.png'),
+            const SizedBox(
+              height: 50,
+            ),
+            Image.asset('assets/otp_image.png'),
+            const SizedBox(
+              height: 20,
+            ),
             const Center(
               child: Text(
                 'OTP verification',
-                style: TextStyle(fontWeight: FontWeight.bold, fontSize: 25),
+                style: TextStyle(
+                    fontWeight: FontWeight.bold,
+                    fontSize: 25,
+                    color: Colors.white),
               ),
             ),
             Center(
               child: Padding(
                 padding: const EdgeInsets.symmetric(vertical: 6),
-                child: Text('Enter OTP sent to +91 ${widget.number}'),
+                child: Text('Enter OTP sent to +91 ${widget.number}',
+                    style: const TextStyle(color: Colors.white)),
               ),
             ),
             const SizedBox(
@@ -114,7 +125,7 @@ class _OtpPageState extends State<OtpPage> {
             ),
             textcode(),
             const SizedBox(
-              height: 80,
+              height: 50,
             ),
             button(),
           ],
@@ -144,7 +155,7 @@ class _OtpPageState extends State<OtpPage> {
         borderRadius: BorderRadius.circular(8),
         boxShadow: [
           const BoxShadow(
-            color: Color.fromARGB(103, 158, 158, 158),
+            color: Color.fromARGB(255, 158, 158, 158),
             blurRadius: 5.0,
           )
         ]);
@@ -182,7 +193,7 @@ class _OtpPageState extends State<OtpPage> {
         },
         style: ElevatedButton.styleFrom(
           padding: const EdgeInsets.all(16.0),
-          backgroundColor: Colors.blue,
+          backgroundColor: Color.fromARGB(255, 3, 125, 224),
         ),
         child: const Padding(
           padding: EdgeInsets.symmetric(horizontal: 80),
@@ -221,48 +232,8 @@ class _OtpPageState extends State<OtpPage> {
         'type': widget.type,
         'number': widget.number,
         'token': '',
+        if (widget.type == 'driver') 'vehicle': widget.vehicle,
       });
     }
   }
 }
-
-// void register() async {
-//     //show loading circle
-//     showDialog(
-//       context: context,
-//       builder: (context) => const Center(
-//         child: CircularProgressIndicator(),
-//       ),
-//     );
-
-//     //make sure passwords match
-//     if (passwordcontroller.text != confirmPWcontroller.text) {
-//       Navigator.pop(context);
-//       displayMessageToUser("Passwords don't Match!", context);
-//     } else {
-//       //try creating new user
-//       try {
-//         //create new user
-//         UserCredential? userCredential = await FirebaseAuth.instance
-//             .createUserWithEmailAndPassword(
-//                 email: emailcontroller.text, password: passwordcontroller.text);
-
-//         //create a user document and add to firestore
-//         createUserDocument(userCredential);
-
-//         //pop loading circle
-//         Navigator.pop(context);
-//         Navigator.push(
-//             context,
-//             MaterialPageRoute(
-//                 builder: (context) => loginScreen(type: widget.type)));
-//       } on FirebaseAuthException catch (e) {
-//         //pop loading circle
-//         if (context.mounted) Navigator.pop(context);
-
-//         //display error message
-//         displayMessageToUser(e.code, context);
-//       }
-//     }
-//   }
-

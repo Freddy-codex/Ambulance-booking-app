@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'regScreen.dart';
+import '../pages/regScreen.dart';
 
-import 'loginScreen.dart';
+import '../pages/loginScreen.dart';
 
 class WelcomeScreen2 extends StatelessWidget {
   final String type;

@@ -3,7 +3,6 @@ import 'package:ambulance/pages/forgot_password.dart';
 import 'package:ambulance/pages/regScreen.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
 
 class loginScreen extends StatefulWidget {
   final String type;
@@ -45,7 +44,7 @@ class _loginScreenState extends State<loginScreen> {
       // ignore: use_build_context_synchronously
 
       if (context.mounted) Navigator.pop(context);
-      Navigator.push(
+      Navigator.pushReplacement(
           // ignore: use_build_context_synchronously
           context,
           MaterialPageRoute(builder: (context) => const AuthPage()));
@@ -73,7 +72,7 @@ class _loginScreenState extends State<loginScreen> {
               width: double.infinity,
               decoration: const BoxDecoration(
                 gradient: LinearGradient(colors: [
-                  Color(0xff1166cc),
+                  Color.fromARGB(255, 201, 9, 9),
                   Color(0xff1d1d1d),
                 ], begin: Alignment.topLeft),
               ),
@@ -115,7 +114,7 @@ class _loginScreenState extends State<loginScreen> {
                               'Gmail',
                               style: TextStyle(
                                 fontWeight: FontWeight.bold,
-                                color: Color(0xff1166cc),
+                                color: Color.fromARGB(255, 206, 6, 6),
                               ),
                             )),
                       ),
@@ -140,7 +139,7 @@ class _loginScreenState extends State<loginScreen> {
                             'Password',
                             style: TextStyle(
                               fontWeight: FontWeight.bold,
-                              color: Color(0xff1166cc),
+                              color: Color.fromARGB(255, 206, 6, 6),
                             ),
                           ),
                         ),
@@ -178,8 +177,8 @@ class _loginScreenState extends State<loginScreen> {
                           decoration: BoxDecoration(
                             borderRadius: BorderRadius.circular(30),
                             gradient: const LinearGradient(colors: [
-                              Color(0xff1166cc),
-                              Color(0xff083a6c),
+                              Color.fromARGB(255, 206, 6, 6),
+                              Color.fromARGB(255, 114, 3, 3),
                             ]),
                           ),
                           child: const Center(

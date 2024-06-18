@@ -3,9 +3,9 @@ import 'dart:io';
 import 'dart:math';
 
 import 'package:ambulance/components/drawer.dart';
-import 'package:ambulance/pages/accept_reject.dart';
-import 'package:ambulance/pages/delivery_state.dart';
-import 'package:ambulance/pages/notification_services.dart';
+import 'package:ambulance/temp/accept_reject.dart';
+import 'package:ambulance/services/delivery_state.dart';
+import 'package:ambulance/services/notification_services.dart';
 import 'package:animated_toggle_switch/animated_toggle_switch.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/cupertino.dart';

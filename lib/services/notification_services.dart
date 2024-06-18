@@ -1,9 +1,6 @@
-import 'dart:io';
-import 'dart:math';
-
 import 'package:app_settings/app_settings.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
-import 'package:flutter/foundation.dart';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 
@@ -17,7 +14,7 @@ class NotificationServices {
   final FlutterLocalNotificationsPlugin _flutterLocalNotificationsPlugin =
       FlutterLocalNotificationsPlugin();
 
-  bool _initialized = false;
+  // bool _initialized = false;
 
   void requestNotificationPermission() async {
     NotificationSettings settings = await messaging.requestPermission(
@@ -93,6 +90,7 @@ class NotificationServices {
       importance: Importance.high,
       priority: Priority.high,
       ticker: 'ticker',
+      icon: '@mipmap/launcher_icon',
     );
 
     const DarwinNotificationDetails darwinNotificationDetails =
@@ -147,10 +145,10 @@ class NotificationServices {
     String userType = message.data['userType'];
     if (userType == 'user') {
       Navigator.pop(context);
-      Navigator.pushNamed(context, 'homepage');
+      Navigator.pushNamed(context, 'userhome');
     } else if (userType == 'driver') {
       Navigator.pop(context);
-      Navigator.pushNamed(context, 'driverspage');
+      Navigator.pushNamed(context, 'driverhome');
     } else {
       Navigator.pushNamed(context, 'authpage');
     }

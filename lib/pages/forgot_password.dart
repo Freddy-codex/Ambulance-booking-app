@@ -2,7 +2,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 
 class ForgotPassword extends StatefulWidget {
-  ForgotPassword({super.key});
+  const ForgotPassword({super.key});
 
   @override
   State<ForgotPassword> createState() => _ForgotPasswordState();
@@ -20,51 +20,60 @@ class _ForgotPasswordState extends State<ForgotPassword> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.black,
+      backgroundColor: const Color.fromARGB(255, 26, 25, 25),
       appBar: AppBar(
-        title: const Text('Reset your Password'),
-        backgroundColor: Colors.black12,
+        centerTitle: true,
+        title: const Text(
+          'Reset your Password',
+          style: TextStyle(fontSize: 20),
+        ),
+        backgroundColor: Colors.black,
         foregroundColor: Colors.white,
       ),
-      body: Padding(
-        padding: const EdgeInsets.all(30.0),
-        child: Column(
-          children: [
-            const SizedBox(
-              height: 180,
-            ),
-            const Text(
-              'Enter your Registered Email',
-              style: TextStyle(color: Colors.white),
-            ),
-            TextField(
-              controller: _emailController,
-              decoration: InputDecoration(
-                hintText: 'Your Email goes here...',
-                fillColor: Colors.grey[200],
-                filled: true,
-                enabledBorder: OutlineInputBorder(
-                  borderSide: const BorderSide(color: Colors.black),
-                  borderRadius: BorderRadius.circular(12),
-                ),
-                focusedBorder: OutlineInputBorder(
-                  borderSide: const BorderSide(color: Colors.red),
-                  borderRadius: BorderRadius.circular(12),
-                ),
+      body: SingleChildScrollView(
+        child: Padding(
+          padding: const EdgeInsets.all(30.0),
+          child: Column(
+            children: [
+              const SizedBox(
+                height: 180,
               ),
-            ),
-            const SizedBox(
-              height: 20,
-            ),
-            MaterialButton(
-              onPressed: passwordReset,
-              color: const Color.fromARGB(255, 235, 16, 0),
-              child: const Text(
-                'Reset Password',
+              const Text(
+                'Enter your Registered Email',
                 style: TextStyle(color: Colors.white),
               ),
-            )
-          ],
+              const SizedBox(
+                height: 15,
+              ),
+              TextField(
+                controller: _emailController,
+                decoration: InputDecoration(
+                  hintText: 'Your Email goes here...',
+                  fillColor: Colors.grey[200],
+                  filled: true,
+                  enabledBorder: OutlineInputBorder(
+                    borderSide: const BorderSide(color: Colors.black),
+                    borderRadius: BorderRadius.circular(12),
+                  ),
+                  focusedBorder: OutlineInputBorder(
+                    borderSide: const BorderSide(color: Colors.red),
+                    borderRadius: BorderRadius.circular(12),
+                  ),
+                ),
+              ),
+              const SizedBox(
+                height: 20,
+              ),
+              MaterialButton(
+                onPressed: passwordReset,
+                color: const Color.fromARGB(255, 235, 16, 0),
+                child: const Text(
+                  'Reset Password',
+                  style: TextStyle(color: Colors.white),
+                ),
+              )
+            ],
+          ),
         ),
       ),
     );

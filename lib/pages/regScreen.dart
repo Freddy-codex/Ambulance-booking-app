@@ -1,12 +1,10 @@
 import 'package:ambulance/pages/loginScreen.dart';
 import 'package:ambulance/pages/otp_page.dart';
-// import 'package:ambulance/pages/phone_number.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:get/get.dart';
-// import 'package:get/get_core/src/get_main.dart';
 
 class RegScreen extends StatefulWidget {
   final String type;
@@ -21,6 +19,7 @@ class _RegScreenState extends State<RegScreen> {
   final TextEditingController passwordcontroller = TextEditingController();
   final TextEditingController confirmPWcontroller = TextEditingController();
   final TextEditingController numbercontroller = TextEditingController();
+  final TextEditingController vehiclecontroller = TextEditingController();
   bool _isObscure = true;
   bool _isObscure2 = true;
   bool isLoading = false;
@@ -88,17 +87,32 @@ class _RegScreenState extends State<RegScreen> {
             });
           },
           codeSent: (String vid, int? token) {
-            Get.to(() => OtpPage(
-                  vid: vid,
-                  type: widget.type,
-                  name: namecontroller.text,
-                  email: emailcontroller.text,
-                  number: numbercontroller.text,
-                  password: passwordcontroller.text,
-                ));
-            setState(() {
-              isLoading = false; // Reset loading state on error
-            });
+            if (widget.type == 'driver') {
+              Get.to(() => OtpPage(
+                    vid: vid,
+                    type: widget.type,
+                    name: namecontroller.text,
+                    email: emailcontroller.text,
+                    number: numbercontroller.text,
+                    password: passwordcontroller.text,
+                    vehicle: vehiclecontroller.text,
+                  ));
+              setState(() {
+                isLoading = false; // Reset loading state on error
+              });
+            } else {
+              Get.to(() => OtpPage(
+                    vid: vid,
+                    type: widget.type,
+                    name: namecontroller.text,
+                    email: emailcontroller.text,
+                    number: numbercontroller.text,
+                    password: passwordcontroller.text,
+                  ));
+              setState(() {
+                isLoading = false; // Reset loading state on error
+              });
+            }
           },
           codeAutoRetrievalTimeout: (vid) {
             setState(() {
@@ -144,10 +158,13 @@ class _RegScreenState extends State<RegScreen> {
               height: double.infinity,
               width: double.infinity,
               decoration: const BoxDecoration(
-                gradient: LinearGradient(colors: [
-                  Color(0xffB81736),
-                  Color(0xff281537),
-                ]),
+                gradient: LinearGradient(
+                  colors: [
+                    Color.fromARGB(255, 201, 9, 9),
+                    Color(0xff1d1d1d),
+                  ],
+                  begin: Alignment.topLeft,
+                ),
               ),
               child: const Padding(
                 padding: EdgeInsets.only(top: 60.0, left: 22),
@@ -230,6 +247,22 @@ class _RegScreenState extends State<RegScreen> {
                           LengthLimitingTextInputFormatter(10),
                         ],
                       ),
+                      if (widget.type == 'driver')
+                        TextField(
+                          controller: vehiclecontroller,
+                          decoration: const InputDecoration(
+                              suffixIcon: Icon(
+                                Icons.directions_bus,
+                                color: Colors.grey,
+                              ),
+                              label: Text(
+                                'Vehicle No',
+                                style: TextStyle(
+                                  fontWeight: FontWeight.bold,
+                                  color: Color(0xffB81736),
+                                ),
+                              )),
+                        ),
                       TextField(
                         controller: passwordcontroller,
                         obscureText: _isObscure,
@@ -280,8 +313,8 @@ class _RegScreenState extends State<RegScreen> {
                               ),
                             )),
                       ),
-                      const SizedBox(
-                        height: 60,
+                      SizedBox(
+                        height: (widget.type == 'driver') ? 30 : 60,
                       ),
                       GestureDetector(
                         onTap: register,
@@ -291,8 +324,8 @@ class _RegScreenState extends State<RegScreen> {
                           decoration: BoxDecoration(
                             borderRadius: BorderRadius.circular(30),
                             gradient: const LinearGradient(colors: [
-                              Color(0xffB81736),
-                              Color(0xff281537),
+                              Color.fromARGB(255, 206, 6, 6),
+                              Color.fromARGB(255, 114, 3, 3),
                             ]),
                           ),
                           child: const Center(
@@ -306,8 +339,8 @@ class _RegScreenState extends State<RegScreen> {
                           ),
                         ),
                       ),
-                      const SizedBox(
-                        height: 50,
+                      SizedBox(
+                        height: (widget.type == 'driver') ? 20 : 50,
                       ),
                       Align(
                         alignment: Alignment.bottomRight,

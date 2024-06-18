@@ -1,4 +1,5 @@
 import 'dart:async';
+import 'package:ambulance/services/constants.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
@@ -103,7 +104,7 @@ class _TrackingPageState extends State<TrackingPage> {
   Future<List<LatLng>> fetchPolylinePoints() async {
     final polylinePoints = PolylinePoints();
     final result = await polylinePoints.getRouteBetweenCoordinates(
-      'AIzaSyASOtAOhPLYKwr9KF-X2h9WatIxNLHWt8s',
+      mapsAPIKey,
       PointLatLng(driverLocation.latitude, driverLocation.longitude),
       PointLatLng(destination.latitude, destination.longitude),
     );

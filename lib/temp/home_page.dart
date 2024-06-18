@@ -3,10 +3,9 @@ import 'dart:convert';
 import 'dart:io';
 
 import 'package:ambulance/components/drawer.dart';
-// import 'package:ambulance/pages/ambulances.dart';
-import 'package:ambulance/pages/markers.dart';
-import 'package:ambulance/pages/notification_services.dart';
-import 'package:ambulance/pages/pick_location_alert.dart';
+import 'package:ambulance/temp/markers.dart';
+import 'package:ambulance/services/notification_services.dart';
+import 'package:ambulance/temp/pick_location_alert.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
@@ -58,55 +57,42 @@ class _HomePageState extends State<HomePage> {
     if (_initialized) return;
     _initialized = true;
 
-    FirebaseMessaging.onMessage.listen((message) {
-      if (kDebugMode) {
-        print(message.notification!.title.toString());
-        print(message.notification?.body.toString());
-        print('Message Data: ${message.data}');
-        // print(message.data['email'].toString());
-      }
-      if (Platform.isAndroid) {
-        notificationServices.initLocalNotifications(context, message);
-        notificationServices.showNotification(message);
-      }
-      if (message.data['context'] == 'accept') {
-        Navigator.pop(context); // Close the dialog
-        QuickAlert.show(
-          context: context,
-          type: QuickAlertType.success,
-          title: 'AMBULANCE ACCEPTED',
-          text: 'Ambulance is on the way...',
-          barrierDismissible: false,
-          disableBackBtn: true,
-        );
-      }
-      if (message.data['context'] == 'reject') {
-        Navigator.pop(context); // Close the dialog
-        QuickAlert.show(
-          context: context,
-          type: QuickAlertType.error,
-          title: 'AMBULANCE REJECTED',
-          text: 'Please Try another ambulance',
-          barrierDismissible: false,
-          disableBackBtn: true,
-        );
-      }
-    });
-
-    notificationServices.setupInteractMessage(context);
-
-// _onMessageSubscription =
-    //     FirebaseMessaging.onMessage.listen((RemoteMessage message) {
-    //   if (!mounted) return;
-    //   print('Got message while in the foreground.');
-    //   print('Message Data: ${message.data}');
-    //   if (message.notification != null) {
-    //     print('Message also contained a notification: ${message.notification}');
+    // FirebaseMessaging.onMessage.listen((message) {
+    //   if (kDebugMode) {
+    //     print(message.notification!.title.toString());
+    //     print(message.notification?.body.toString());
+    //     print('Message Data: ${message.data}');
+    //     // print(message.data['email'].toString());
     //   }
-    //   // setState(() {
-    //   //   showButton = true;
-    //   // });
+    //   if (Platform.isAndroid) {
+    //     notificationServices.initLocalNotifications(context, message);
+    //     notificationServices.showNotification(message);
+    //   }
+    //   if (message.data['context'] == 'accept') {
+    //     Navigator.pop(context); // Close the dialog
+    //     QuickAlert.show(
+    //       context: context,
+    //       type: QuickAlertType.success,
+    //       title: 'AMBULANCE ACCEPTED',
+    //       text: 'Ambulance is on the way...',
+    //       barrierDismissible: false,
+    //       disableBackBtn: true,
+    //     );
+    //   }
+    //   if (message.data['context'] == 'reject') {
+    //     Navigator.pop(context); // Close the dialog
+    //     QuickAlert.show(
+    //       context: context,
+    //       type: QuickAlertType.error,
+    //       title: 'AMBULANCE REJECTED',
+    //       text: 'Please Try another ambulance',
+    //       barrierDismissible: false,
+    //       disableBackBtn: true,
+    //     );
+    //   }
     // });
+
+    // notificationServices.setupInteractMessage(context);
   }
 
   Future<String?> navigateToMapScreen() async {
@@ -156,12 +142,6 @@ class _HomePageState extends State<HomePage> {
         .doc(email)
         .get();
   }
-
-  // @override
-  // void dispose() {
-  //   _onMessageSubscription?.cancel(); // Cancel the subscription
-  //   super.dispose();
-  // }
 
   //logout function
   void logout() {
@@ -219,12 +199,6 @@ class _HomePageState extends State<HomePage> {
         } else {
           return;
         }
-        // if (Platform.isAndroid) {
-        //   SystemNavigator.pop();
-        // } else {
-        //   exit(0);
-        // }
-        // return false;
       },
       child: Scaffold(
           appBar: AppBar(
@@ -303,27 +277,6 @@ class _HomePageState extends State<HomePage> {
                     disableBackBtn: true,
                     // autoCloseDuration: Duration(seconds: 5),
                   );
-                  // if (acceptreject != '') {
-                  //   if (acceptreject == 'accept') {
-                  //     QuickAlert.show(
-                  //       context: context,
-                  //       type: QuickAlertType.success,
-                  //       title: 'AMBULANCE ACCEPTED',
-                  //       text: 'Ambulance is on the way...',
-                  //       barrierDismissible: false,
-                  //       disableBackBtn: true,
-                  //     );
-                  //   } else if (acceptreject == 'reject') {
-                  //     QuickAlert.show(
-                  //       context: context,
-                  //       type: QuickAlertType.error,
-                  //       title: 'AMBULANCE REJECTED',
-                  //       text: 'Please Try another ambulance',
-                  //       barrierDismissible: false,
-                  //       disableBackBtn: true,
-                  //     );
-                  //   }
-                  // }
 
                   if (driverid != "") {
                     await fetchDriverToken(driverid);
@@ -416,15 +369,6 @@ class _HomePageState extends State<HomePage> {
                 icon: const Icon(Icons.location_searching),
                 label: const Text('TRACK'),
               ),
-              // if (showButton)
-              //   Positioned(
-              //     bottom: 20,
-              //     left: 20,
-              //     child: ElevatedButton(
-              //       onPressed: () {},
-              //       child: Text('NEW Action Button'),
-              //     ),
-              //   )
             ]),
           )),
     );
