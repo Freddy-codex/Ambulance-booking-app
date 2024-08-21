@@ -1,7 +1,6 @@
 # ambulance
 
 A new Flutter project.
-### Test
 
 ## Getting Started
 
