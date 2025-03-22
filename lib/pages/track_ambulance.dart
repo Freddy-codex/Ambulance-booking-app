@@ -26,6 +26,7 @@ class _TrackAmbulanceState extends State<TrackAmbulance> {
   LatLng driverLocation = const LatLng(10.15706, 76.4463702);
   Map<PolylineId, Polyline> polylines = {};
   GoogleMapController? mapcontroller;
+  String mapsApiKey = dotenv.env['MAPS_API_KEY'] ?? "";
   // User? currentUser = FirebaseAuth.instance.currentUser;
   BitmapDescriptor markerIcon =
       BitmapDescriptor.defaultMarkerWithHue(BitmapDescriptor.hueViolet);
@@ -110,6 +111,7 @@ class _TrackAmbulanceState extends State<TrackAmbulance> {
   }
 
   void updateUIWithLocation(double latitude, double longitude) async {
+    print("Updating UI with new location: $latitude, $longitude");
     setState(() {
       driverLocation = LatLng(latitude, longitude);
     });
@@ -124,11 +126,12 @@ class _TrackAmbulanceState extends State<TrackAmbulance> {
   Future<List<LatLng>> fetchPolylinePoints() async {
     final polylinePoints = PolylinePoints();
     final result = await polylinePoints.getRouteBetweenCoordinates(
-      'AIzaSyASOtAOhPLYKwr9KF-X2h9WatIxNLHWt8s',
+      mapsApiKey,
       PointLatLng(driverLocation.latitude, driverLocation.longitude),
       PointLatLng(destination.latitude, destination.longitude),
     );
     if (result.points.isNotEmpty) {
+      print("Fetched polyline points: ${result.points.length}");
       return result.points
           .map((point) => LatLng(point.latitude, point.longitude))
           .toList();
@@ -187,12 +190,12 @@ class _TrackAmbulanceState extends State<TrackAmbulance> {
     updateDestinationLocation(email!);
   }
 
-  @override
-  void dispose() {
-    super.dispose();
-    trackingTimer?.cancel(); // Cancel the timer when the widget is disposed
-    trackingTimer = null;
-  }
+  // @override
+  // void dispose() {
+  //   super.dispose();
+  //   trackingTimer?.cancel(); // Cancel the timer when the widget is disposed
+  //   trackingTimer = null;
+  // }
 
   Future<bool> _onWillPop(BuildContext context) async {
     return await showDialog(
@@ -268,6 +271,9 @@ class _TrackAmbulanceState extends State<TrackAmbulance> {
                 target: driverLocation,
                 zoom: 15.0,
               ),
+              onMapCreated: (controller) {
+                mapcontroller = controller;
+              },
               markers: {
                 Marker(
                   markerId: const MarkerId('destination'),
